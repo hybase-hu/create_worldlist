@@ -1,18 +1,19 @@
 """
 saját worldlist generálása
 töltsük fel a változó tömböt stringként vesszővel elválasztva.
-az első betű legyen mindig kis betű, a program automatikussan készít nayg kezdőbetűvel is
+minden betű legyen mindig kis betű, a program automatikussan készít nagy kezdőbetűvel is
 egy varriánst
 """
 import datetime
 import uuid
 
-
-names = ["istvan", "isti", "pisti", "petra", "petracska"]
 pets = ["bia", "leila", "csuvi", "csuvy"]
-favourites = ["toyota", "tankcsapda", "anime","peugeot","juventus"]
+childs = ["janka", "botond", "barnabas"]
+favourites = ["toyota", "tankcsapda", "anime", "peugeot", "juventus", "juventus", "realMadrid"]
+first_name = ["kiss", "vitez"]
+last_name = ["viktor", "vivien", "elemer", "zoltan"]
 # a születésnapok első eleme mindig legyen egy "" üres karakter, így lesz szám nélküli jelszónk is
-birth_numbers = ["", "1988", "0423", "88", "1128", "1999"]
+birth_numbers = ["", "1988", "0423", "88", "1128", "1999", "2000", "20001002", "1002"]
 
 now = datetime.datetime.now()
 
@@ -24,23 +25,31 @@ file = open(file_name, 'w')
 
 
 def create_banner():
-    print("#/" * 10)
-    print("#/" * 10)
-    print("\tPassword wordlist......")
-    print("#/" * 10)
-    print("#/" * 10)
+    print("*" * 50)
+    print("Create Password wordlist with data......")
+    print("*" * 50)
 
 
 def create_file():
     i = 0
     for num in birth_numbers:
-        for name in names:
-            file.write(name + num + "\n")
-            file.write(name.capitalize() + num + "\n")
-            i += 2
+        for fname in first_name:
+            for lname in last_name:
+                file.write(fname.capitalize() + lname + '\n')
+                file.write(fname + lname.capitalize() + '\n')
+                file.write(fname.capitalize() + lname.capitalize() + '\n')
+                file.write(fname.capitalize() + lname + num + '\n')
+                file.write(fname + lname.capitalize() + num + '\n')
+                file.write(fname.capitalize() + lname.capitalize() + num + '\n')
+
+                i += 6
         for pet in pets:
             file.write(pet + num + "\n")
             file.write(pet.capitalize() + num + "\n")
+            i += 2
+        for child in childs:
+            file.write(child + num + "\n")
+            file.write(child.capitalize() + num + "\n")
             i += 2
         for fav in favourites:
             file.write(fav + num + "\n")
@@ -48,13 +57,9 @@ def create_file():
             i += 2
 
     file.close()
-    print("--" * 10)
-    print("--" * 10)
     print("created file:", file.name)
 
     print("generated password number:", i)
-    print("--" * 10)
-    print("--" * 10)
 
 
 if __name__ == '__main__':
